@@ -59,13 +59,19 @@ def load_image(path):
 
     return Image.open(path).convert("RGBA")
 
-def save_image(image, name ,output_path=SCRIPTS_DIR):
+def save_image(image, name, output_path=SCRIPTS_DIR):
+
+    os.makedirs(output_path, exist_ok=True)
+
     image_path = os.path.join(output_path, name)
+
     try:
         image.save(image_path)
         print(f"✅ Saved image to {image_path}")
+
     except Exception as e:
         print(f"❌ Error: Failed to save image. {e}")
+        raise
 
 def load_font(path, size):
     if not os.path.exists(path):
